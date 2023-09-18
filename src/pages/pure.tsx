@@ -30,7 +30,6 @@ export const Pure = () => {
   return (
     <div>
       <CustomButton onClick={generateNewAd}>Re-render</CustomButton>
-      <CustomCard {...bannerAd} />
     </div>
   );
 };

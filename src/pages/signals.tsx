@@ -1,7 +1,7 @@
 import { CustomButton } from "../components/Custom-button";
 import { CustomCard } from "../components/Custom-card";
+import { bannerAd } from "../state";
 import { generateRandomAd, utilLog } from "../utils";
-import { useSignal } from "@preact/signals-react";
 
 export interface Ad {
   text: string;
@@ -15,22 +15,18 @@ export interface AdLink {
 
 export const Signals = () => {
   utilLog("pure");
-  const bannerAd = useSignal<Ad>({
-    text: "Welcome to our Signals 101",
-    link: {
-      label: "CLICK HERE!",
-      url: "https://google.com",
-    },
-  });
 
-  const generateNewAd = () => {
-    bannerAd.value = generateRandomAd();
+  const generateNewText = () => {
+    const { text, link } = generateRandomAd();
+    bannerAd.text.value = text;
+    bannerAd.link.label.value = link.label;
+    bannerAd.link.url.value = link.url;
   };
 
   return (
     <div>
-      <CustomButton onClick={generateNewAd}>Re-render</CustomButton>
-      <CustomCard {...bannerAd} />
+      <CustomButton onClick={generateNewText}>Re-render</CustomButton>
+      <CustomCard />
     </div>
   );
 };
